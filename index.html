@@ -1,645 +1,325 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Auto Tech | اوتو تك لإدارة مراكز صيانة السيارات</title>
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Cairo:wght@400;600;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auto Tech | اوتو تك لإدارة مراكز صيانة السيارات وأساطيل السيارات</title>
+<meta name="description" content="برنامج عربي لإدارة الورش والأساطيل: أوامر الشغل، قطع الغيار، الفنيين، تاريخ كل سيارة، والفواتير في مكان واحد. كلمنا واتساب على 01270407109.">
+<meta name="theme-color" content="#0A1628">
+<meta property="og:title" content="Auto Tech | اوتو تك">
+<meta property="og:description" content="كل سيارة في ورشتك أو أسطولك: عارف هي فين، ومين شغال عليها، وكام هتكلّف.">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Cairo:wght@400;600;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0A1628; --navy2:#0D1F3C; --blue:#1A6FD4; --blue2:#2F8EFF;
+  --orange:#FF6B1A; --orange2:#FF8C42; --light:#4FC3F7; --white:#F0F6FF; --muted:#8BA3C7;
+  --card-bg:rgba(255,255,255,0.04); --card-border:rgba(255,255,255,0.08);
+  --ok:#27C93F; --bad:#FF5F56;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Cairo','Inter',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden;line-height:1.8;padding-bottom:78px}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--blue2);outline-offset:3px;border-radius:6px}
+.inner{max-width:1160px;margin-inline:auto}
+.grad{background:linear-gradient(90deg,var(--orange),var(--blue2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 
-    :root {
-      --navy:    #0A1628;
-      --navy2:   #0D1F3C;
-      --blue:    #1A6FD4;
-      --blue2:   #2F8EFF;
-      --orange:  #FF6B1A;
-      --orange2: #FF8C42;
-      --light:   #4FC3F7;
-      --white:   #F0F6FF;
-      --muted:   #8BA3C7;
-      --card-bg: rgba(255,255,255,0.04);
-      --card-border: rgba(255,255,255,0.08);
-    }
+/* HEADER */
+header{position:fixed;top:0;width:100%;z-index:100;background:rgba(10,22,40,0.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,107,26,0.15);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo-wrap{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--orange),var(--blue2));border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:18px;color:#fff;letter-spacing:1px}
+.logo-text{display:flex;flex-direction:column;line-height:1.1}
+.logo-en{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;background:linear-gradient(90deg,var(--orange2),var(--blue2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px}
+.logo-ar{font-size:10px;color:var(--muted);font-weight:600}
+nav.main{display:flex;gap:28px}
+nav.main a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:600;transition:color .2s}
+nav.main a:hover{color:var(--orange2)}
 
-    html { scroll-behavior: smooth; }
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:10px;padding:14px 30px;font-size:16px;font-family:'Cairo',sans-serif;font-weight:700;cursor:pointer;text-decoration:none;transition:transform .2s,box-shadow .2s,background .2s,opacity .2s;color:#fff}
+.btn-primary{background:linear-gradient(135deg,var(--orange),var(--orange2));box-shadow:0 8px 30px rgba(255,107,26,0.35)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(255,107,26,0.5)}
+.btn-wa{background:linear-gradient(135deg,var(--blue),var(--blue2));box-shadow:0 8px 30px rgba(26,111,212,0.35)}
+.btn-wa:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(47,142,255,0.45)}
+.btn-secondary{background:transparent;color:var(--blue2);border:1.5px solid rgba(47,142,255,0.4)}
+.btn-secondary:hover{background:rgba(47,142,255,0.08);border-color:var(--blue2)}
+.btn-sm{padding:9px 22px;font-size:14px;border-radius:8px;box-shadow:none}
 
-    body {
-      font-family: 'Cairo', 'Inter', sans-serif;
-      background: var(--navy);
-      color: var(--white);
-      overflow-x: hidden;
-    }
+/* HERO */
+.hero{min-height:100vh;padding:100px 5% 60px;display:grid;grid-template-columns:1fr 1.05fr;align-items:center;gap:60px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 55% 55% at 80% 50%,rgba(26,111,212,0.18) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 10% 80%,rgba(255,107,26,0.12) 0%,transparent 70%),radial-gradient(ellipse 30% 30% at 50% 0%,rgba(47,142,255,0.1) 0%,transparent 70%)}
+.hero::after{content:'';position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(47,142,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(47,142,255,0.04) 1px,transparent 1px);background-size:60px 60px}
+.hero-content,.job-wrap{position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,107,26,0.1);border:1px solid rgba(255,107,26,0.3);border-radius:30px;padding:6px 16px;font-size:12px;color:var(--orange2);font-weight:700;margin-bottom:22px}
+.hero-badge::before{content:'●';font-size:8px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+h1{font-family:'Rajdhani','Cairo',sans-serif;font-size:clamp(30px,5.6vw,54px);font-weight:700;line-height:1.35;margin-bottom:18px}
+h1 .grad{display:block}
+.hero-sub{font-size:16px;color:var(--muted);max-width:520px;font-weight:600;margin-bottom:32px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.hero-note{margin-top:18px;font-size:13px;color:var(--muted);font-weight:600}
 
-    /* ── HEADER ── */
-    header {
-      position: fixed; top: 0; width: 100%; z-index: 100;
-      background: rgba(10,22,40,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,107,26,0.15);
-      padding: 0 5%;
-      display: flex; align-items: center; justify-content: space-between;
-      height: 68px;
-    }
-    .logo-wrap { display: flex; align-items: center; gap: 12px; }
-    .logo-icon {
-      width: 42px; height: 42px;
-      background: linear-gradient(135deg, var(--orange), var(--blue2));
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Rajdhani', sans-serif;
-      font-weight: 700; font-size: 18px; color: #fff;
-      letter-spacing: 1px;
-    }
-    .logo-text { display: flex; flex-direction: column; line-height: 1.1; }
-    .logo-en {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 22px; font-weight: 700;
-      background: linear-gradient(90deg, var(--orange2), var(--blue2));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      letter-spacing: 2px;
-    }
-    .logo-ar { font-size: 10px; color: var(--muted); font-weight: 600; }
+/* JOB CARD (dashboard-style mockup) */
+.job{background:linear-gradient(160deg,var(--navy2) 0%,var(--navy) 100%);border:1px solid rgba(255,255,255,0.1);border-radius:18px;padding:20px;box-shadow:0 0 0 1px rgba(255,107,26,0.1),0 40px 80px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.05)}
+.job-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.job-top b{font-size:14px}
+.sample{background:rgba(255,107,26,0.12);border:1px solid rgba(255,107,26,0.3);color:var(--orange2);font-size:11px;font-weight:700;padding:2px 12px;border-radius:30px}
+.car{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:22px}
+.car strong{display:block;font-size:18px}
+.car span{color:var(--muted);font-size:13px;font-weight:600}
+.plate{background:#fff;color:var(--navy);border:2px solid #1b2c47;border-radius:6px;padding:1px 14px 4px;text-align:center;line-height:1.3;min-width:124px}
+.plate em{display:block;font-style:normal;font-size:10px;color:#5b6b85;border-bottom:1px solid #d5dbe5;margin-bottom:2px;font-weight:600}
+.plate b{font-family:'Cairo',sans-serif;font-size:17px;font-weight:900;letter-spacing:1px}
+.steps{display:flex;list-style:none;margin-bottom:20px}
+.step{flex:1;text-align:center;position:relative;font-size:12px;color:var(--muted);font-weight:600}
+.step::before{content:"";position:absolute;top:13px;inset-inline:-50% 50%;height:3px;background:rgba(255,255,255,0.1);z-index:0}
+.step:first-child::before{display:none}
+.dot{position:relative;z-index:1;display:grid;place-items:center;width:28px;height:28px;margin:0 auto 6px;border-radius:50%;background:rgba(255,255,255,0.12);color:#fff;font-size:12px;font-weight:700}
+.step.done,.step.active{color:var(--white)}
+.step.done .dot,.step.done::before{background:linear-gradient(135deg,var(--blue),var(--blue2))}
+.step.active .dot{background:linear-gradient(135deg,var(--orange),var(--orange2))}
+.step.done .dot,.step.active .dot{animation:fillin .45s backwards;animation-delay:calc(var(--i)*.5s + .5s)}
+.step.done::before{animation:fillin .45s backwards;animation-delay:calc(var(--i)*.5s + .3s)}
+@keyframes fillin{from{background:rgba(255,255,255,0.12);color:transparent}}
+.rows div{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-top:1px dashed rgba(255,255,255,0.12);font-size:14px}
+.rows dt{color:var(--muted);font-weight:600}
+.rows dd{font-weight:700;text-align:left}
+.rows .warn dd{color:var(--ok)}
+.job-foot{display:flex;justify-content:space-between;align-items:baseline;margin-top:6px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.1)}
+.job-foot b{font-family:'Rajdhani','Cairo',sans-serif;font-size:30px;font-weight:700;background:linear-gradient(90deg,var(--orange2),var(--blue2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 
-    nav { display: flex; gap: 28px; }
-    nav a {
-      color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 600;
-      transition: color .2s;
-    }
-    nav a:hover { color: var(--orange2); }
-    .btn-nav {
-      background: linear-gradient(135deg, var(--orange), var(--orange2));
-      color: #fff; border: none; border-radius: 8px;
-      padding: 9px 22px; font-size: 14px; font-family: 'Cairo', sans-serif;
-      font-weight: 700; cursor: pointer; transition: opacity .2s;
-    }
-    .btn-nav:hover { opacity: .85; }
+/* SECTIONS */
+.section{padding:80px 5%}
+.sec-title{font-family:'Rajdhani','Cairo',sans-serif;font-size:clamp(26px,3.6vw,44px);font-weight:700;line-height:1.4;margin-bottom:12px}
+.sec-sub{font-size:15px;color:var(--muted);max-width:560px;font-weight:600}
+.alt{background:linear-gradient(180deg,var(--navy) 0%,var(--navy2) 100%)}
+.divider{height:1px;margin:0 5%;background:linear-gradient(90deg,transparent,rgba(255,107,26,.3),rgba(47,142,255,.3),transparent)}
 
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      padding: 100px 5% 60px;
-      display: grid; grid-template-columns: 1fr 1.1fr; align-items: center; gap: 60px;
-      position: relative; overflow: hidden;
-    }
-    /* gradient mesh background */
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0; pointer-events: none;
-      background:
-        radial-gradient(ellipse 55% 55% at 80% 50%, rgba(26,111,212,0.18) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 40% at 10% 80%, rgba(255,107,26,0.12) 0%, transparent 70%),
-        radial-gradient(ellipse 30% 30% at 50% 0%, rgba(47,142,255,0.1) 0%, transparent 70%);
-    }
-    /* animated grid lines */
-    .hero::after {
-      content: '';
-      position: absolute; inset: 0; pointer-events: none;
-      background-image:
-        linear-gradient(rgba(47,142,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(47,142,255,0.04) 1px, transparent 1px);
-      background-size: 60px 60px;
-    }
+/* TABS + PAIN TABLE */
+.tabs{display:inline-flex;gap:6px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;padding:5px;margin:24px 0 28px;max-width:100%}
+.tabs button{font:700 15px 'Cairo',sans-serif;background:none;border:0;padding:10px 20px;border-radius:8px;cursor:pointer;color:var(--muted);transition:color .2s}
+.tabs button:hover{color:var(--white)}
+.tabs button[aria-selected="true"]{background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff}
+.pain-head,.pain-row{display:grid;grid-template-columns:1fr 1fr;gap:12px 40px}
+.pain-head{font-weight:900;padding-bottom:10px;border-bottom:2px solid rgba(255,255,255,0.15)}
+.pain-head span:first-child{color:var(--bad)}
+.pain-head span:last-child{color:var(--ok)}
+.pain-row{padding-block:16px;border-bottom:1px solid var(--card-border)}
+.pain-row p:first-child{color:var(--muted);font-weight:600}
+.pain-row p:first-child::before{content:"✕ ";color:var(--bad);font-weight:900}
+.pain-row p:last-child{font-weight:700}
+.pain-row p:last-child::before{content:"✓ ";color:var(--ok);font-weight:900}
+[hidden]{display:none!important}
 
-    .hero-content { position: relative; z-index: 2; }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(255,107,26,0.1); border: 1px solid rgba(255,107,26,0.3);
-      border-radius: 30px; padding: 6px 16px; font-size: 12px;
-      color: var(--orange2); font-weight: 700; margin-bottom: 24px;
-      letter-spacing: .5px;
-    }
-    .hero-badge::before { content: '●'; font-size: 8px; animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+/* FEATURES */
+.features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:44px}
+.feat-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:26px;transition:border-color .3s,transform .3s}
+.feat-card:hover{border-color:rgba(255,107,26,0.3);transform:translateY(-3px)}
+.feat-icon-wrap{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,rgba(255,107,26,.18),rgba(47,142,255,.18));display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:16px}
+.feat-title{font-size:17px;font-weight:700;margin-bottom:8px}
+.feat-desc{font-size:13px;color:var(--muted);font-weight:600}
 
-    h1 {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: clamp(40px, 5vw, 70px);
-      font-weight: 700; line-height: 1.05;
-      letter-spacing: 2px;
-    }
-    h1 span { display: block; }
-    .h1-auto { color: var(--white); }
-    .h1-tech {
-      background: linear-gradient(90deg, var(--orange), var(--blue2));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
+/* FOUNDER */
+.founder{background:var(--card-bg);border:1px solid var(--card-border);border-inline-start:4px solid var(--orange);border-radius:16px;padding:28px 30px;max-width:720px;margin-top:26px}
+.founder p{color:var(--muted);font-weight:600;margin-bottom:12px}
+.founder p:last-child{margin-bottom:0}
+.founder strong{color:var(--white)}
 
-    .hero-sub {
-      font-size: 16px; color: var(--muted); line-height: 1.8;
-      margin: 20px 0 36px; max-width: 480px;
-      font-weight: 600; text-align: right;
-    }
+/* CTA */
+.cta-section{padding:90px 5%;text-align:center;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(26,111,212,0.12),transparent)}
+.cta-title{font-family:'Rajdhani','Cairo',sans-serif;font-size:clamp(28px,4vw,50px);font-weight:700;line-height:1.4;margin-bottom:14px}
+.cta-sub{font-size:15px;color:var(--muted);margin:0 auto 34px;max-width:520px;font-weight:600}
+.cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.tel{display:inline-block;margin-top:28px;font-family:'Rajdhani',sans-serif;font-size:32px;font-weight:700;letter-spacing:2px;text-decoration:none}
 
-    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--orange), var(--orange2));
-      color: #fff; border: none; border-radius: 10px;
-      padding: 14px 32px; font-size: 16px; font-family: 'Cairo', sans-serif;
-      font-weight: 700; cursor: pointer;
-      box-shadow: 0 8px 30px rgba(255,107,26,0.35);
-      transition: transform .2s, box-shadow .2s;
-    }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255,107,26,0.5); }
-    .btn-secondary {
-      background: transparent;
-      color: var(--blue2); border: 1.5px solid rgba(47,142,255,0.4);
-      border-radius: 10px; padding: 14px 32px; font-size: 16px;
-      font-family: 'Cairo', sans-serif; font-weight: 700; cursor: pointer;
-      transition: background .2s, border-color .2s;
-    }
-    .btn-secondary:hover { background: rgba(47,142,255,0.08); border-color: var(--blue2); }
+/* FOOTER */
+footer{background:var(--navy2);border-top:1px solid rgba(255,255,255,0.05);padding:28px 5%;text-align:center}
+.footer-copy{font-size:13px;color:var(--muted);font-weight:600}
+.footer-copy span{background:linear-gradient(90deg,var(--orange2),var(--blue2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:700}
 
-    .hero-stats { display: flex; gap: 32px; margin-top: 44px; }
-    .stat { text-align: center; }
-    .stat-num {
-      font-family: 'Rajdhani', sans-serif; font-size: 32px; font-weight: 700;
-      background: linear-gradient(90deg, var(--orange2), var(--blue2));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .stat-label { font-size: 12px; color: var(--muted); font-weight: 600; }
+/* STICKY BAR (mobile) */
+.bar{position:fixed;inset-inline:0;bottom:0;z-index:90;display:flex;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(13,31,60,0.96);backdrop-filter:blur(12px);border-top:1px solid rgba(255,107,26,0.2)}
+.bar .btn{flex:1;padding:11px 6px;font-size:14px;border-radius:8px;box-shadow:none}
 
-    /* ── DASHBOARD MOCKUP ── */
-    .dashboard-wrap { position: relative; z-index: 2; }
-    .dash-frame {
-      background: linear-gradient(160deg, #0D1F3C 0%, #0A1628 100%);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 18px;
-      padding: 20px;
-      box-shadow:
-        0 0 0 1px rgba(255,107,26,0.1),
-        0 40px 80px rgba(0,0,0,0.5),
-        inset 0 1px 0 rgba(255,255,255,0.05);
-      animation: floatUp 6s ease-in-out infinite;
-    }
-    @keyframes floatUp { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-
-    .dash-topbar {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 16px; padding-bottom: 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .dash-title-text {
-      font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 700;
-      color: var(--white);
-    }
-    .dash-dots { display: flex; gap: 6px; }
-    .dash-dot {
-      width: 10px; height: 10px; border-radius: 50%;
-    }
-    .dot-r { background: #FF5F56; }
-    .dot-y { background: #FFBD2E; }
-    .dot-g { background: #27C93F; }
-
-    /* KPI row inside mockup */
-    .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 14px; }
-    .kpi-mini {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 10px; padding: 12px 10px;
-      position: relative; overflow: hidden;
-    }
-    .kpi-mini::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    }
-    .kpi-mini.orange::before { background: linear-gradient(90deg, var(--orange), var(--orange2)); }
-    .kpi-mini.blue::before   { background: linear-gradient(90deg, var(--blue), var(--blue2)); }
-    .kpi-mini.teal::before   { background: linear-gradient(90deg, #00C9B1, #4FC3F7); }
-    .kpi-mini.red::before    { background: linear-gradient(90deg, #FF4D6A, #FF8F7A); }
-
-    .kpi-mini-label { font-size: 9px; color: var(--muted); font-weight: 600; margin-bottom: 4px; font-family: 'Cairo',sans-serif; }
-    .kpi-mini-val {
-      font-family: 'Rajdhani', sans-serif; font-size: 22px; font-weight: 700; color: var(--white);
-    }
-    .kpi-mini-delta { font-size: 9px; color: #27C93F; margin-top: 2px; }
-    .kpi-mini-delta.neg { color: #FF5F56; }
-
-    /* Chart row inside mockup */
-    .chart-row { display: grid; grid-template-columns: 1.6fr 1fr; gap: 10px; }
-    .chart-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 10px; padding: 12px;
-    }
-    .chart-card-title { font-size: 10px; color: var(--muted); font-weight: 700; font-family: 'Cairo',sans-serif; margin-bottom: 10px; }
-
-    /* bar chart */
-    .bars { display: flex; align-items: flex-end; gap: 6px; height: 70px; }
-    .bar-col { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
-    .bar {
-      width: 100%; border-radius: 4px 4px 0 0;
-      background: linear-gradient(180deg, var(--blue2), var(--blue));
-      transition: height .4s ease;
-    }
-    .bar.hi { background: linear-gradient(180deg, var(--orange2), var(--orange)); }
-    .bar-lbl { font-size: 8px; color: var(--muted); font-family: 'Cairo',sans-serif; }
-
-    /* donut */
-    .donut-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 80px; }
-    .donut {
-      width: 60px; height: 60px;
-      border-radius: 50%;
-      background: conic-gradient(var(--orange) 0deg 126deg, var(--blue2) 126deg 234deg, #00C9B1 234deg 306deg, rgba(255,255,255,0.1) 306deg 360deg);
-      position: relative;
-    }
-    .donut::after {
-      content: ''; position: absolute; inset: 12px;
-      background: #0D1F3C; border-radius: 50%;
-    }
-    .donut-legend { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; justify-content: center; }
-    .dleg { display: flex; align-items: center; gap: 3px; font-size: 8px; color: var(--muted); }
-    .dleg-dot { width: 6px; height: 6px; border-radius: 50%; }
-
-    /* ── SECTION TITLE ── */
-    .section { padding: 80px 5%; }
-    .sec-label {
-      font-size: 12px; font-weight: 700; letter-spacing: 2px;
-      color: var(--orange2); text-transform: uppercase; margin-bottom: 10px;
-    }
-    .sec-title {
-      font-family: 'Rajdhani', sans-serif; font-size: clamp(28px, 3.5vw, 46px);
-      font-weight: 700; color: var(--white); margin-bottom: 14px;
-    }
-    .sec-sub { font-size: 15px; color: var(--muted); max-width: 560px; line-height: 1.8; font-weight: 600; }
-
-    /* ── KPI CARDS SECTION ── */
-    .kpi-section { background: linear-gradient(180deg, var(--navy) 0%, var(--navy2) 100%); }
-    .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 44px; }
-    .kpi-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 16px; padding: 24px 20px;
-      position: relative; overflow: hidden;
-      transition: transform .3s, box-shadow .3s;
-      cursor: default;
-    }
-    .kpi-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-    }
-    .kpi-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    }
-    .kpi-card.c1::before { background: linear-gradient(90deg,#FF6B1A,#FF8C42); }
-    .kpi-card.c2::before { background: linear-gradient(90deg,#1A6FD4,#2F8EFF); }
-    .kpi-card.c3::before { background: linear-gradient(90deg,#00C9B1,#4FC3F7); }
-    .kpi-card.c4::before { background: linear-gradient(90deg,#A855F7,#7C3AED); }
-    .kpi-card.c5::before { background: linear-gradient(90deg,#FF4D6A,#FF8F7A); }
-    .kpi-card.c6::before { background: linear-gradient(90deg,#F59E0B,#FBBF24); }
-    .kpi-card.c7::before { background: linear-gradient(90deg,#10B981,#34D399); }
-    .kpi-card.c8::before { background: linear-gradient(90deg,#06B6D4,#67E8F9); }
-
-    .kpi-icon {
-      width: 44px; height: 44px; border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 22px; margin-bottom: 16px;
-    }
-    .ic1 { background: rgba(255,107,26,.15); }
-    .ic2 { background: rgba(26,111,212,.15); }
-    .ic3 { background: rgba(0,201,177,.15); }
-    .ic4 { background: rgba(168,85,247,.15); }
-    .ic5 { background: rgba(255,77,106,.15); }
-    .ic6 { background: rgba(245,158,11,.15); }
-    .ic7 { background: rgba(16,185,129,.15); }
-    .ic8 { background: rgba(6,182,212,.15); }
-
-    .kpi-label { font-size: 12px; color: var(--muted); font-weight: 700; margin-bottom: 8px; }
-    .kpi-value {
-      font-family: 'Rajdhani', sans-serif; font-size: 38px; font-weight: 700;
-      color: var(--white); line-height: 1; margin-bottom: 10px;
-    }
-    .kpi-footer { display: flex; align-items: center; gap: 8px; }
-    .kpi-trend {
-      font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 20px;
-    }
-    .up   { background: rgba(39,201,63,.12); color: #27C93F; }
-    .down { background: rgba(255,95,86,.12); color: #FF5F56; }
-    .kpi-period { font-size: 11px; color: var(--muted); font-weight: 600; }
-
-    /* ── FEATURES ── */
-    .features-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 50px; }
-    .feat-card {
-      background: var(--card-bg); border: 1px solid var(--card-border);
-      border-radius: 16px; padding: 28px;
-      transition: border-color .3s, transform .3s;
-    }
-    .feat-card:hover { border-color: rgba(255,107,26,0.3); transform: translateY(-3px); }
-    .feat-icon-wrap {
-      width: 52px; height: 52px; border-radius: 14px;
-      background: linear-gradient(135deg, rgba(255,107,26,.18), rgba(47,142,255,.18));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 26px; margin-bottom: 18px;
-    }
-    .feat-title { font-size: 17px; font-weight: 700; color: var(--white); margin-bottom: 10px; }
-    .feat-desc { font-size: 13px; color: var(--muted); line-height: 1.8; font-weight: 600; }
-
-    /* ── DIVIDER ── */
-    .divider {
-      height: 1px; margin: 0 5%;
-      background: linear-gradient(90deg, transparent, rgba(255,107,26,.3), rgba(47,142,255,.3), transparent);
-    }
-
-    /* ── CTA ── */
-    .cta-section {
-      padding: 90px 5%; text-align: center;
-      background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(26,111,212,0.12), transparent);
-    }
-    .cta-title {
-      font-family: 'Rajdhani', sans-serif; font-size: clamp(30px,4vw,54px);
-      font-weight: 700; color: var(--white); margin-bottom: 14px;
-    }
-    .cta-title span {
-      background: linear-gradient(90deg, var(--orange), var(--blue2));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .cta-sub { font-size: 15px; color: var(--muted); margin-bottom: 36px; font-weight: 600; }
-    .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--navy2); border-top: 1px solid rgba(255,255,255,0.05);
-      padding: 32px 5%; display: flex; align-items: center; justify-content: space-between;
-    }
-    .footer-copy { font-size: 13px; color: var(--muted); font-weight: 600; }
-    .footer-copy span {
-      background: linear-gradient(90deg, var(--orange2), var(--blue2));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      font-weight: 700;
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; padding-top: 90px; }
-      .dashboard-wrap { order: -1; }
-      .kpi-grid { grid-template-columns: repeat(2,1fr); }
-      .features-grid { grid-template-columns: 1fr 1fr; }
-      .kpi-row { grid-template-columns: repeat(2,1fr); }
-    }
-    @media (max-width: 600px) {
-      .kpi-grid { grid-template-columns: 1fr 1fr; }
-      .features-grid { grid-template-columns: 1fr; }
-      nav { display: none; }
-    }
-  </style>
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;padding-top:96px;min-height:auto;gap:36px}
+  .job-wrap{order:2}
+  .features-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  nav.main{display:none}
+  .logo-ar{display:none}
+  .features-grid{grid-template-columns:1fr}
+  .pain-head{display:none}
+  .pain-row{grid-template-columns:1fr;gap:6px}
+  .tabs{display:flex}
+  .tabs button{flex:1;padding-inline:6px}
+  .hero-actions .btn{flex:1 1 100%}
+  .section{padding:60px 5%}
+}
+@media(min-width:901px){body{padding-bottom:0}.bar{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
 </head>
 <body>
 
-<!-- ── HEADER ── -->
 <header>
-  <div class="logo-wrap">
+  <a class="logo-wrap" href="#top" aria-label="Auto Tech اوتو تك">
     <div class="logo-icon">AT</div>
     <div class="logo-text">
       <span class="logo-en">AUTO TECH</span>
       <span class="logo-ar">اوتو تك لإدارة مراكز صيانة السيارات</span>
     </div>
-  </div>
-  <nav>
+  </a>
+  <nav class="main" aria-label="أقسام الصفحة">
+    <a href="#pain">المشاكل وبنحلها</a>
     <a href="#features">المميزات</a>
-    <a href="#kpis">الإحصائيات</a>
-    <a href="#cta">التواصل</a>
+    <a href="#contact">التواصل</a>
   </nav>
-  <button class="btn-nav">ابدأ الآن</button>
+  <a class="btn btn-primary btn-sm" href="https://forms.gle/gF3buNrTmFyt6XNk8" target="_blank" rel="noopener">سجل الآن</a>
 </header>
 
-<!-- ── HERO ── -->
+<main id="top">
 <section class="hero">
   <div class="hero-content">
-    <div class="hero-badge">منصة إدارة ورش السيارات الأولى في مصر</div>
-    <h1>
-      <span class="h1-auto">AUTO</span>
-      <span class="h1-tech">TECH</span>
-    </h1>
-    <p style="font-family:'Rajdhani',sans-serif; font-size:18px; color:var(--muted); letter-spacing:1px; margin-bottom:8px;">
-      اوتو تك لإدارة مراكز صيانة السيارات
-    </p>
-    <p class="hero-sub">
-      نظام متكامل لإدارة ورش الصيانة — أوامر الشغل، قطع الغيار، الفنيين، والعملاء من لوحة تحكم واحدة ذكية.
-    </p>
+    <div class="hero-badge">للورش ومراكز الصيانة وأساطيل السيارات</div>
+    <h1>كل سيارة في ورشتك أو أسطولك:
+      <span class="grad">عارف هي فين، ومين شغال عليها، وكام هتكلّف.</span></h1>
+    <p class="hero-sub">Auto Tech برنامج عربي لإدارة مراكز الصيانة وأساطيل السيارات. أوامر الشغل وقطع الغيار والفنيين والفواتير في مكان واحد، بدل الدفتر والإكسيل وجروبات الواتساب.</p>
     <div class="hero-actions">
-      <button class="btn-primary">🚀 جرّب مجاناً</button>
-      <button class="btn-secondary">📺 شاهد العرض</button>
+      <a class="btn btn-primary" href="https://forms.gle/gF3buNrTmFyt6XNk8" target="_blank" rel="noopener">🚀 سجل الآن</a>
+      <a class="btn btn-wa" data-wa href="https://wa.me/201270407109">💬 كلمنا واتساب</a>
+      <a class="btn btn-secondary" href="tel:+201270407109">📞 01270407109</a>
     </div>
-    <div class="hero-stats">
-      <div class="stat">
-        <div class="stat-num">+500</div>
-        <div class="stat-label">ورشة مشتركة</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">99%</div>
-        <div class="stat-label">رضا العملاء</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">24/7</div>
-        <div class="stat-label">دعم فني</div>
-      </div>
-    </div>
+    <p class="hero-note">عرض مجاني على بيانات ورشتك أنت، مش على أمثلة جاهزة.</p>
   </div>
 
-  <!-- DASHBOARD MOCKUP -->
-  <div class="dashboard-wrap">
-    <div class="dash-frame">
-      <div class="dash-topbar">
-        <div class="dash-title-text">🛠 لوحة تحكم الورشة</div>
-        <div class="dash-dots">
-          <div class="dash-dot dot-r"></div>
-          <div class="dash-dot dot-y"></div>
-          <div class="dash-dot dot-g"></div>
-        </div>
+  <div class="job-wrap">
+    <aside class="job" aria-label="مثال على بطاقة أمر شغل داخل البرنامج">
+      <div class="job-top"><b>🛠 أمر شغل #1042</b><span class="sample">مثال توضيحي</span></div>
+      <div class="car">
+        <div><strong>ميتسوبيشي L200</strong><span>دخلت اليوم 9:15 ص</span></div>
+        <div class="plate"><em>مصر</em><b>أ ب ج ١٢٣٤</b></div>
       </div>
-
-      <div class="kpi-row">
-        <div class="kpi-mini orange">
-          <div class="kpi-mini-label">أوامر اليوم</div>
-          <div class="kpi-mini-val">24</div>
-          <div class="kpi-mini-delta">▲ 12%</div>
-        </div>
-        <div class="kpi-mini blue">
-          <div class="kpi-mini-label">قيد الإنجاز</div>
-          <div class="kpi-mini-val">9</div>
-          <div class="kpi-mini-delta">▲ 5%</div>
-        </div>
-        <div class="kpi-mini teal">
-          <div class="kpi-mini-label">إيراد اليوم</div>
-          <div class="kpi-mini-val">8.4K</div>
-          <div class="kpi-mini-delta">▲ 18%</div>
-        </div>
-        <div class="kpi-mini red">
-          <div class="kpi-mini-label">شكاوى</div>
-          <div class="kpi-mini-val">2</div>
-          <div class="kpi-mini-delta neg">▼ 3%</div>
-        </div>
-      </div>
-
-      <div class="chart-row">
-        <div class="chart-card">
-          <div class="chart-card-title">أوامر الشغل — الأسبوع الحالي</div>
-          <div class="bars">
-            <div class="bar-col"><div class="bar" style="height:45px"></div><div class="bar-lbl">أحد</div></div>
-            <div class="bar-col"><div class="bar" style="height:55px"></div><div class="bar-lbl">اثن</div></div>
-            <div class="bar-col"><div class="bar hi" style="height:68px"></div><div class="bar-lbl">ثلا</div></div>
-            <div class="bar-col"><div class="bar" style="height:40px"></div><div class="bar-lbl">أرب</div></div>
-            <div class="bar-col"><div class="bar hi" style="height:70px"></div><div class="bar-lbl">خمس</div></div>
-            <div class="bar-col"><div class="bar" style="height:30px"></div><div class="bar-lbl">جمع</div></div>
-            <div class="bar-col"><div class="bar" style="height:20px"></div><div class="bar-lbl">سبت</div></div>
-          </div>
-        </div>
-        <div class="chart-card">
-          <div class="chart-card-title">توزيع الأعمال</div>
-          <div class="donut-wrap">
-            <div class="donut"></div>
-            <div class="donut-legend">
-              <div class="dleg"><div class="dleg-dot" style="background:var(--orange)"></div>ميكانيكا</div>
-              <div class="dleg"><div class="dleg-dot" style="background:var(--blue2)"></div>كهرباء</div>
-              <div class="dleg"><div class="dleg-dot" style="background:#00C9B1"></div>هيكل</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      <ol class="steps">
+        <li class="step done" style="--i:0"><span class="dot">✓</span>استلام</li>
+        <li class="step done" style="--i:1"><span class="dot">✓</span>فحص</li>
+        <li class="step done" style="--i:2"><span class="dot">✓</span>قطع الغيار</li>
+        <li class="step active" style="--i:3"><span class="dot">●</span>تنفيذ</li>
+        <li class="step" style="--i:4"><span class="dot"></span>تسليم</li>
+      </ol>
+      <dl class="rows">
+        <div><dt>الفني</dt><dd>محمود</dd></div>
+        <div><dt>قطع مصروفة من المخزن</dt><dd>فلتر زيت، طقم تيل فرامل</dd></div>
+        <div class="warn"><dt>مخزون فلتر الزيت</dt><dd>متبقي 3، هننبهك قبل ما يخلص</dd></div>
+      </dl>
+      <div class="job-foot"><span>إجمالي الفاتورة</span><b>3,850 ج</b></div>
+    </aside>
   </div>
 </section>
 
-<!-- ── KPI CARDS ── -->
-<section class="kpi-section section" id="kpis">
-  <div class="sec-label">📊 مؤشرات الأداء</div>
-  <div class="sec-title">كل شيء تحت السيطرة</div>
-  <div class="sec-sub">تابع أداء ورشتك لحظة بلحظة بمؤشرات واضحة وتقارير فورية.</div>
+<div class="divider"></div>
 
-  <div class="kpi-grid">
-    <div class="kpi-card c1">
-      <div class="kpi-icon ic1">🔧</div>
-      <div class="kpi-label">إجمالي أوامر الشغل</div>
-      <div class="kpi-value">1,284</div>
-      <div class="kpi-footer">
-        <span class="kpi-trend up">▲ 14%</span>
-        <span class="kpi-period">مقارنة بالشهر الماضي</span>
-      </div>
+<section class="section alt" id="pain">
+  <div class="inner">
+    <h2 class="sec-title">المشاكل اللي بتعيشها كل يوم، <span class="grad">وبنحلها</span></h2>
+    <p class="sec-sub">اختار انت مين:</p>
+    <div class="tabs" role="tablist" aria-label="اختر نوع النشاط">
+      <button role="tab" id="tab-ws" aria-controls="p-ws" aria-selected="true">صاحب ورشة / مركز صيانة</button>
+      <button role="tab" id="tab-fl" aria-controls="p-fl" aria-selected="false">مدير أسطول</button>
     </div>
-    <div class="kpi-card c2">
-      <div class="kpi-icon ic2">⚙️</div>
-      <div class="kpi-label">أوامر قيد التنفيذ</div>
-      <div class="kpi-value">37</div>
-      <div class="kpi-footer">
-        <span class="kpi-trend up">▲ 8%</span>
-        <span class="kpi-period">هذا الأسبوع</span>
-      </div>
+
+    <div id="p-ws" role="tabpanel" aria-labelledby="tab-ws">
+      <div class="pain-head"><span>اللي بيحصل دلوقتي</span><span>مع Auto Tech</span></div>
+      <div class="pain-row"><p>العميل بيتصل خمس مرات: «سيارتي خلصت؟»</p><p>حالة كل سيارة قدامك في ثانية، تطمّنه من غير ما تسأل الفني.</p></div>
+      <div class="pain-row"><p>قطعة اتصرفت ومحدش سجلها، والحساب آخر الشهر مش مظبوط.</p><p>كل قطعة مربوطة بأمر الشغل اللي اتصرفت عليه، وتنبيه قبل ما الصنف يخلص.</p></div>
+      <div class="pain-row"><p>مش عارف مين الفني اللي بينجز، ومين اللي بيأخر الشغل.</p><p>شغل كل فني وإنتاجيته متسجلة وواضحة.</p></div>
+      <div class="pain-row"><p>السيارة رجعت بنفس العطل ومحدش فاكر اتصلحت إزاي.</p><p>تاريخ كل سيارة: كل صيانة، كل قطعة، كل فني.</p></div>
+      <div class="pain-row"><p>آخر الشهر مش عارف كسبت كام فعلاً.</p><p>إيرادات ومصروفات وفواتير ومستحقات، وتقارير تتصدّر Excel.</p></div>
     </div>
-    <div class="kpi-card c3">
-      <div class="kpi-icon ic3">✅</div>
-      <div class="kpi-label">إيرادات الشهر</div>
-      <div class="kpi-value">142K</div>
-      <div class="kpi-footer">
-        <span class="kpi-trend up">▲ 22%</span>
-        <span class="kpi-period">جنيه مصري</span>
-      </div>
-    </div>
-    <div class="kpi-card c4">
-      <div class="kpi-icon ic4">👥</div>
-      <div class="kpi-label">عملاء نشطون</div>
-      <div class="kpi-value">486</div>
-      <div class="kpi-footer">
-        <span class="kpi-trend up">▲ 6%</span>
-        <span class="kpi-period">عميل مسجل</span>
-      </div>
-    </div>
-    <div class="kpi-card c5">
-      <div class="kpi-icon ic5">🚗</div>
-      <div class="kpi-label">سيارات في الورشة</div>
-      <div class="kpi-value">19</div>
-      <div class="kpi-footer">
-        <span class="kpi-trend down">▼ 2</span>
-        <span class="kpi-period">الآن</span>
-      </div>
-    </div>
-    <div class="kpi-card c6">
-      <div class="kpi-icon ic6">📦</div>
-      <div class="kpi-label">قطع الغيار المتاحة</div>
-      <div class="kpi-value">3,510</div>
-      <div class="kpi-footer">
-        <span class="kpi-trend down">▼ 3%</span>
-        <span class="kpi-period">تنبيه: 12 صنف منخفض</span>
-      </div>
-    </div>
-    <div class="kpi-card c7">
-      <div class="kpi-icon ic7">⭐</div>
-      <div class="kpi-label">تقييم العملاء</div>
-      <div class="kpi-value">4.8</div>
-      <div class="kpi-footer">
-        <span class="kpi-trend up">▲ 0.2</span>
-        <span class="kpi-period">من 5 نجوم</span>
-      </div>
-    </div>
-    <div class="kpi-card c8">
-      <div class="kpi-icon ic8">🔩</div>
-      <div class="kpi-label">الفنيون النشطون</div>
-      <div class="kpi-value">12</div>
-      <div class="kpi-footer">
-        <span class="kpi-trend up">▲ 2</span>
-        <span class="kpi-period">من أصل 14 فني</span>
-      </div>
+
+    <div id="p-fl" role="tabpanel" aria-labelledby="tab-fl" hidden>
+      <div class="pain-head"><span>اللي بيحصل دلوقتي</span><span>مع Auto Tech</span></div>
+      <div class="pain-row"><p>سيارة واقفة في الورشة يعني مهمة واقفة وفلوس بتضيع، ومحدش عارف بقالها قد إيه.</p><p>تابع كل سيارة في الورشة ومدة وقوفها ومرحلة إصلاحها.</p></div>
+      <div class="pain-row"><p>صيانة دورية فاتت، فحصل عطل كبير في وقت غلط.</p><p>تنبيهات الصيانة الدورية لكل سيارة قبل ميعادها.</p></div>
+      <div class="pain-row"><p>مصاريف قطع الغيار على كل سيارة مش واضحة.</p><p>تكلفة صيانة كل سيارة من أول يوم، وتقارير تقارن بين السيارات.</p></div>
+      <div class="pain-row"><p>مين صرف القطعة دي ولأي سيارة؟ مفيش إجابة.</p><p>كل صرف مسجل بأمر شغل واسم الفني والتاريخ.</p></div>
+      <div class="pain-row"><p>ملفات ودفاتر متفرقة، والمعلومة بتروح مع اللي سابوا الشغل.</p><p>سجل واحد لكل سيارة بكل تاريخها، موجود دايماً.</p></div>
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- ── FEATURES ── -->
 <section class="section" id="features">
-  <div class="sec-label">💡 المميزات</div>
-  <div class="sec-title">كل ما تحتاجه في مكان واحد</div>
-  <div class="sec-sub">منظومة متكاملة صُممت خصيصاً لاحتياجات ورش صيانة السيارات في مصر.</div>
-
-  <div class="features-grid">
-    <div class="feat-card">
-      <div class="feat-icon-wrap">📋</div>
-      <div class="feat-title">إدارة أوامر الشغل</div>
-      <div class="feat-desc">أنشئ وتابع وأغلق أوامر الشغل بسهولة مع تتبع كل مرحلة من الاستلام حتى التسليم وإصدار الفاتورة.</div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon-wrap">🔩</div>
-      <div class="feat-title">مخزون قطع الغيار</div>
-      <div class="feat-desc">إدارة المخزون الذكية مع تنبيهات النفاد التلقائية وربط القطع بأوامر الشغل مباشرة.</div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon-wrap">👷</div>
-      <div class="feat-title">إدارة الفنيين</div>
-      <div class="feat-desc">توزيع الأعمال على الفنيين، متابعة الأداء، وقياس إنتاجية كل عضو في الفريق.</div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon-wrap">🚘</div>
-      <div class="feat-title">سجل العملاء والمركبات</div>
-      <div class="feat-desc">قاعدة بيانات كاملة للعملاء وسياراتهم مع تاريخ الصيانة الكامل وتنبيهات الصيانة الدورية.</div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon-wrap">📊</div>
-      <div class="feat-title">تقارير ولوحة تحكم</div>
-      <div class="feat-desc">تقارير مفصلة بالإيرادات والمصروفات والأداء مع رسوم بيانية تفاعلية لمساعدتك في القرارات.</div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon-wrap">💰</div>
-      <div class="feat-title">الفواتير والمحاسبة</div>
-      <div class="feat-desc">إنشاء فواتير احترافية وتتبع المدفوعات والمستحقات مع ملخص مالي يومي وشهري وسنوي.</div>
+  <div class="inner">
+    <h2 class="sec-title">كل اللي الورشة محتاجاه في <span class="grad">لوحة واحدة</span></h2>
+    <p class="sec-sub">واجهة عربي بالكامل، مصممة على طريقة شغل الورش المصرية.</p>
+    <div class="features-grid">
+      <div class="feat-card"><div class="feat-icon-wrap">📋</div><div class="feat-title">أوامر الشغل</div><div class="feat-desc">من الاستلام لحد التسليم والفاتورة، مع لوحة Kanban تبين مرحلة كل سيارة.</div></div>
+      <div class="feat-card"><div class="feat-icon-wrap">🔩</div><div class="feat-title">مخزون قطع الغيار</div><div class="feat-desc">كل قطعة مربوطة بأمر الشغل، وتنبيه تلقائي لما الصنف يقل.</div></div>
+      <div class="feat-card"><div class="feat-icon-wrap">👷</div><div class="feat-title">الفنيين</div><div class="feat-desc">توزيع الشغل ومتابعة إنتاجية كل فني.</div></div>
+      <div class="feat-card"><div class="feat-icon-wrap">🚘</div><div class="feat-title">العملاء والسيارات</div><div class="feat-desc">تاريخ الصيانة الكامل لكل سيارة وتنبيهات الصيانة الدورية.</div></div>
+      <div class="feat-card"><div class="feat-icon-wrap">💰</div><div class="feat-title">الفواتير والمدفوعات</div><div class="feat-desc">فواتير جاهزة ومتابعة للمستحقات.</div></div>
+      <div class="feat-card"><div class="feat-icon-wrap">📊</div><div class="feat-title">التقارير ولوحة المتابعة</div><div class="feat-desc">رسوم بيانية للإيراد والمصروف والأداء، وتصدير Excel.</div></div>
+      <div class="feat-card"><div class="feat-icon-wrap">🏢</div><div class="feat-title">أكتر من ورشة أو فرع</div><div class="feat-desc">كل جهة ببياناتها المنفصلة على نفس المنصة.</div></div>
+      <div class="feat-card"><div class="feat-icon-wrap">🚀</div><div class="feat-title">تجربة قبل ما تقرر</div><div class="feat-desc">نشغّله معاك على بيانات شغلك الحقيقية، وانت تحكم.</div></div>
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- ── CTA ── -->
-<section class="cta-section" id="cta">
-  <div class="cta-title">جاهز تطور <span>ورشتك؟</span></div>
-  <p class="cta-sub">انضم لأكثر من 500 ورشة تستخدم Auto Tech في مصر — جرّب مجاناً لمدة 14 يوم.</p>
-  <div class="cta-actions">
-    <button class="btn-primary" style="font-size:17px; padding:16px 40px;">🚀 ابدأ التجربة المجانية</button>
-    <button class="btn-secondary" style="font-size:17px; padding:16px 40px;">📞 تواصل معنا</button>
+<section class="section alt" id="why">
+  <div class="inner">
+    <h2 class="sec-title">اتبنى بإيد مهندس سيارات، <span class="grad">مش مبرمج بس</span></h2>
+    <div class="founder">
+      <p>أنا <strong>م. أحمد حنفي</strong>، مهندس ميكانيكا سيارات بخبرة أكتر من 7 سنين في إدارة ورش صيانة السيارات الثقيلة، والإشراف على الفنيين، وتنسيق قطع الغيار، وتخطيط الصيانة.</p>
+      <p>عارف الوجع ده من جوه الورشة: الدفتر اللي بيضيع، القطعة اللي بتختفي، والعميل اللي بيسأل. Auto Tech اتعمل علشان يحل ده بالظبط.</p>
+    </div>
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
+<section class="cta-section" id="contact">
+  <h2 class="cta-title">خلّينا نجرّبه على <span class="grad">ورشتك أو أسطولك</span></h2>
+  <p class="cta-sub">سجّل بياناتك أو ابعتلنا رسالة واحدة على واتساب، وهنحدد معاك عرض قصير على بيانات شغلك.</p>
+  <div class="cta-actions">
+    <a class="btn btn-primary" href="https://forms.gle/gF3buNrTmFyt6XNk8" target="_blank" rel="noopener">🚀 سجل الآن</a>
+    <a class="btn btn-wa" data-wa href="https://wa.me/201270407109">💬 كلمنا واتساب</a>
+    <a class="btn btn-secondary" href="tel:+201270407109">📞 اتصل بينا</a>
+  </div>
+  <a class="tel grad" href="tel:+201270407109" dir="ltr">01270407109</a>
+</section>
+</main>
+
 <footer>
-  <div class="footer-copy">© 2025 <span>AUTO TECH</span> — جميع الحقوق محفوظة</div>
-  <div class="footer-copy" style="font-size:12px; direction:ltr;">اوتو تك لإدارة مراكز صيانة السيارات</div>
+  <div class="footer-copy">© 2026 <span>AUTO TECH</span> — اوتو تك لإدارة مراكز صيانة السيارات</div>
 </footer>
 
+<nav class="bar" aria-label="تواصل سريع">
+  <a class="btn btn-primary" href="https://forms.gle/gF3buNrTmFyt6XNk8" target="_blank" rel="noopener">سجل الآن</a>
+  <a class="btn btn-wa" data-wa href="https://wa.me/201270407109">واتساب</a>
+  <a class="btn btn-secondary" href="tel:+201270407109">اتصل</a>
+</nav>
+
+<script>
+(function(){
+  var msg = encodeURIComponent('أهلاً، شفت Auto Tech وعايز أعرف أكتر عن البرنامج وأجرّبه على شغلي.');
+  document.querySelectorAll('a[data-wa]').forEach(function(a){
+    a.href = 'https://wa.me/201270407109?text=' + msg;
+  });
+  var tabs = document.querySelectorAll('[role="tab"]');
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){
+      tabs.forEach(function(o){
+        var on = o === t;
+        o.setAttribute('aria-selected', on);
+        document.getElementById(o.getAttribute('aria-controls')).hidden = !on;
+      });
+    });
+  });
+})();
+</script>
 </body>
 </html>
